@@ -138,7 +138,7 @@ async def auto_join_room_cb(room, event):
 
     #create new user, room entry in db if not already existing
     if check_if_user_is_existing(user_name) == False:
-        create_new_user(hashed_user_name, "<module name>") #add name of inserted module
+        create_new_user(hashed_user_name, "Syllabus") #add name of inserted module
 
     if check_if_room_is_existing(room_id) == False:
         create_new_room(room_id, hashed_user_name)

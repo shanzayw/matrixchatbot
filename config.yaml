@@ -1,6 +1,6 @@
 matrix:
-  user_id: "<full user matrix id>"
-  user_password: "<user password>"
+  user_id: "@shanzaychat:matrix.org"
+  user_password: "Kronos12345!"
   homeserver_url: "https://matrix.org"
 
 database:

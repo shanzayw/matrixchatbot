@@ -26,15 +26,15 @@ def list_to_string(topic):
 
 def add_data_basis():
     '''analyze web index and store into db'''
-    module = "<module name>"    #add module name here
+    module = "Syllabus"    #add module name here
     module_original = module
     module = module.lower()
     module_in_db = check_if_domain_already_in_data_basis(module)
 
     if module_in_db == None:
 
-        url = "<web index path>"  #add path of web index here
-        url_prefix = "<url prefix>" #add url prefix here if necessary, prefix can also be ""
+        url = "https://www.cs.princeton.edu/courses/archive/spr22/cos126/syllabus/"  #add path of web index here
+        url_prefix = "" #add url prefix here if necessary, prefix can also be ""
         response = requests.get(url)
         soup = BeautifulSoup(response.text)
         links = soup.findAll('li')
