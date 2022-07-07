@@ -3,7 +3,7 @@ import json
 import requests
 
 from cleaninsights import CleanInsights
-from cleaninsights.store import Store
+from cleaninsights.store.memory import MemoryStore
 from cleaninsights.conf import Configuration
 
 # initalization 
@@ -13,7 +13,7 @@ config = Configuration.from_dict({
         "server": "metrics.cleaninsights.org",
         "server_side_anon_usage": True,
         "max_retry_delay": 0,
-        "site_id": 11,
+        "site_id": 26,
         "timeout": 10,
         "campaigns": {
             "chatstats": {
@@ -27,13 +27,26 @@ config = Configuration.from_dict({
     })
 
 # initialization 
-store = Store("memory")
+store = MemoryStore()
+#store = Store("memory")
 ci = CleanInsights(config, store)
 
 
 # measuring visit 
-ci.measure_visit("/#/room/!KLZJkDkGXKDcfJiNbW:matrix.org", "chatstats")
+ci.measure_visit("app.element.io/#/room/!KLZJkDkGXKDcfJiNbW:matrix.org", "chatstats")
 # https://app.element.io/#/room/!KLZJkDkGXKDcfJiNbW:matrix.org
+
+# add an additional call to measure_view --> like everytime it gets a chat
+# message 
+# fidn wherever its getting the loop of incomign messages from matrix 
+# and that is where you need to (in main.py) --> you can see send message
+# maybe add a view --> async def message_cb(room, event):
+# log measure_view for --> user_name = room.user_name(event.sender)
+# logging how many messages does thic chatbot reiceve everyday 
+# log using measure_view call with that linke --> user_name = room.user_name(event.sender)
+
+
+
 
 
 report = json.dumps({

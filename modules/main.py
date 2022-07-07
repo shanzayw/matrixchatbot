@@ -3,6 +3,7 @@ import time
 import sys
 import hashlib
 import uuid
+import ci_stats
 
 sys.path.append("./../")    #allows python interpreter to find modules
 
@@ -26,7 +27,7 @@ config = Config(config_filepath)
 #AsyncClient configuration options
 client_config = AsyncClientConfig(
     store_sync_tokens=True,
-    encryption_enabled=True,
+    encryption_enabled=False,
 )
 
 #initialize matrix client
@@ -106,7 +107,7 @@ async def message_cb(room, event):
             print("New message event: " + str(message_body))
             if check_if_user_is_existing(user_name) == False:
                 #create new user entry in db
-                create_new_user(user_name, "<module name>") #add name of inserted module
+                create_new_user(user_name, "general") #add name of inserted module
 
             #pass message to other modules
             processed_message = language_processing(message_body)
@@ -138,7 +139,7 @@ async def auto_join_room_cb(room, event):
 
     #create new user, room entry in db if not already existing
     if check_if_user_is_existing(user_name) == False:
-        create_new_user(hashed_user_name, "Syllabus") #add name of inserted module
+        create_new_user(hashed_user_name, "general") #add name of inserted module
 
     if check_if_room_is_existing(room_id) == False:
         create_new_room(room_id, hashed_user_name)
